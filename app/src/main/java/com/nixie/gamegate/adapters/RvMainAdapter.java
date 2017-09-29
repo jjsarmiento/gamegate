@@ -40,7 +40,7 @@ public class RvMainAdapter extends RecyclerView.Adapter<RvMainAdapter.RvMainView
     @Override
     public void onBindViewHolder(RvMainViewHolder holder, int position) {
         holder.tvTitle.setText(BaseDomain.cardMainList.get(position).getTitle());
-        holder.tvContent.setText(BaseDomain.cardMainList.get(position).getContent());
+        holder.tvContent.setText(BaseDomain.cardMainList.get(position).getContentShort());
         holder.ivHeadImg.setImageResource(BaseDomain.cardMainList.get(position).getUrlImg());
     }
 

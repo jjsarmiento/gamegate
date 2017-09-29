@@ -1,5 +1,7 @@
 package com.nixie.gamegate.models;
 
+import com.nixie.gamegate.commons.Default;
+
 /**
  * Created by Phase1 on 9/29/2017.
  */
@@ -32,6 +34,10 @@ public class CardMain {
 
     public String getContent() {
         return content;
+    }
+
+    public String getContentShort() {
+        return (content.length() > Default.TEXT_LENGTH_LIMIT) ? content.substring(0, Default.TEXT_LENGTH_LIMIT) : content;
     }
 
     public void setContent(String content) {
