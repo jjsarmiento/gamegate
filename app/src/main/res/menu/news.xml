@@ -2,13 +2,13 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/action_settings"
+        android:id="@+id/news_url"
         android:orderInCategory="100"
-        android:title="@string/action_settings"
+        android:title="@string/visit_website"
         app:showAsAction="never" />
     <item
-        android:id="@+id/action_version"
+        android:id="@+id/news_hide"
         android:orderInCategory="100"
-        android:title="@string/version"
+        android:title="@string/hide"
         app:showAsAction="never" />
 </menu>

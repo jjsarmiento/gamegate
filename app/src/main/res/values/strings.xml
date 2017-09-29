@@ -9,4 +9,7 @@
     <string name="news">News</string>
     <string name="jobs">Jobs</string>
     <string name="btn_read_more">Read More</string>
+    <string name="hide">Hide</string>
+    <string name="visit_website">Visit Website</string>
+    <string name="version">Version</string>
 </resources>

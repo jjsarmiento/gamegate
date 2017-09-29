@@ -4,11 +4,15 @@ import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.nixie.gamegate.NewsActivity;
 import com.nixie.gamegate.R;
 import com.nixie.gamegate.commons.BaseDomain;
 import com.nixie.gamegate.commons.Util;
@@ -42,6 +46,15 @@ public class RvMainAdapter extends RecyclerView.Adapter<RvMainAdapter.RvMainView
         holder.tvTitle.setText(BaseDomain.cardMainList.get(position).getTitle());
         holder.tvContent.setText(BaseDomain.cardMainList.get(position).getContentShort());
         holder.ivHeadImg.setImageResource(BaseDomain.cardMainList.get(position).getUrlImg());
+
+//        holder.tbMenu.inflateMenu(R.menu.news);
+//        holder.tbMenu.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+//            @Override
+//            public boolean onMenuItemClick(MenuItem item) {
+//                Toast.makeText(BaseDomain.activity, item.getOrder(), Toast.LENGTH_SHORT).show();
+//                return false;
+//            }
+//        });
     }
 
     @Override
@@ -56,6 +69,7 @@ public class RvMainAdapter extends RecyclerView.Adapter<RvMainAdapter.RvMainView
         protected TextView tvTitle;
         protected TextView tvContent;
         protected Toolbar tbMenu;
+        protected Button btnReadMore;
 
         public RvMainViewHolder(View v) {
             super(v);
@@ -64,11 +78,22 @@ public class RvMainAdapter extends RecyclerView.Adapter<RvMainAdapter.RvMainView
             tvContent = v.findViewById(R.id.tv_content);
             tbMenu = v.findViewById(R.id.tb_menu);
             ivHeadImg = v.findViewById(R.id.iv_headimg);
+            btnReadMore = v.findViewById(R.id.btn_read_more);
+
+            tbMenu.inflateMenu(R.menu.news);
+            tbMenu.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+                @Override
+                public boolean onMenuItemClick(MenuItem item) {
+                    Toast.makeText(BaseDomain.activity, getAdapterPosition(), Toast.LENGTH_SHORT).show();;
+                    return false;
+                }
+            });
         }
 
         @Override
         public void onClick(View view) {
-
+            BaseDomain.cardMain = BaseDomain.cardMainList.get(getAdapterPosition());
+            vhUtil.start(NewsActivity.class);
         }
     }
 }
