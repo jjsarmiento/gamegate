@@ -3,6 +3,7 @@ package com.nixie.gamegate;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.ActionBar;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -14,6 +15,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.github.ksoichiro.android.observablescrollview.ObservableRecyclerView;
+import com.github.ksoichiro.android.observablescrollview.ObservableScrollViewCallbacks;
+import com.github.ksoichiro.android.observablescrollview.ScrollState;
 import com.nixie.gamegate.adapters.RvMainAdapter;
 import com.nixie.gamegate.commons.BaseDomain;
 import com.nixie.gamegate.commons.Util;
@@ -22,10 +26,10 @@ import com.nixie.gamegate.models.CardMain;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, ObservableScrollViewCallbacks {
 
     private Util util;
-    private RecyclerView recyclerView;
+    private ObservableRecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +69,9 @@ public class MainActivity extends AppCompatActivity
         BaseDomain.cardMainList = listX;
         /** SAMPLE DATA */
 
-        recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+//        recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+        recyclerView = (ObservableRecyclerView) findViewById(R.id.recyclerView);
+        recyclerView.setScrollViewCallbacks(this);
         BaseDomain.cardMainList = listX;
         util.setRecyclerViewAdapter(recyclerView, new RvMainAdapter(listX));
     }
@@ -121,5 +127,32 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    public void onScrollChanged(int scrollY, boolean firstScroll, boolean dragging) {
+
+    }
+
+    @Override
+    public void onDownMotionEvent() {
+
+    }
+
+    @Override
+    public void onUpOrCancelMotionEvent(ScrollState scrollState) {
+        ActionBar ab = getSupportActionBar();
+        if (ab == null) {
+            return;
+        }
+        if (scrollState == ScrollState.UP) {
+            if (ab.isShowing()) {
+                ab.hide();
+            }
+        } else if (scrollState == ScrollState.DOWN) {
+            if (!ab.isShowing()) {
+                ab.show();
+            }
+        }
     }
 }

@@ -46,15 +46,6 @@ public class RvMainAdapter extends RecyclerView.Adapter<RvMainAdapter.RvMainView
         holder.tvTitle.setText(BaseDomain.cardMainList.get(position).getTitle());
         holder.tvContent.setText(BaseDomain.cardMainList.get(position).getContentShort());
         holder.ivHeadImg.setImageResource(BaseDomain.cardMainList.get(position).getUrlImg());
-
-//        holder.tbMenu.inflateMenu(R.menu.news);
-//        holder.tbMenu.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
-//            @Override
-//            public boolean onMenuItemClick(MenuItem item) {
-//                Toast.makeText(BaseDomain.activity, item.getOrder(), Toast.LENGTH_SHORT).show();
-//                return false;
-//            }
-//        });
     }
 
     @Override
